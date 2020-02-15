@@ -20,15 +20,34 @@ export default {
     },
     actions: {
         async refresh({ commit }) {
+            function getAllMusicFile(folderPath,allMusicArr){
+                const dirs = fs.readdirSync(folderPath)
+                for (let item of dirs) {
+                    const pathname = path.join(folderPath, item)
+                    const stat = fs.statSync(pathname)
+                    if (stat.isFile()) {
+                        allMusicArr.push({pathname,folder:folderPath,item,stat});
+                    }else{
+                        getAllMusicFile(pathname,allMusicArr);
+                    }
+                }
+            }
             commit('clear')
             const folders = Vue.$store.state.user.setting.localSongsFolders
             for (let folder of folders) {
+
+                const arr = [];
+                getAllMusicFile(folder,arr)
                 try {
-                    const dirs = fs.readdirSync(folder)
-                    for (let item of dirs) {
-                        const pathname = path.join(folder, item)
-                        const stat = fs.statSync(pathname)
-                        if (stat.isFile()) {
+                    // const dirs = fs.readdirSync(folder)
+                    // for (let item of dirs) {
+                    //     const pathname = path.join(folder, item)
+                    //     const stat = fs.statSync(pathname)
+                    //     if (stat.isFile()) {
+                    for (let obj of arr) {
+                        
+                        const {item,pathname,folder,stat} = obj;
+                        // if (stat.isFile()) {
                             if (item.endsWith('.mp3') || item.endsWith('flac')) {
                                 const metadata = await mm.parseFile(pathname)
                                 if (metadata.common.title === '可不可以') {
@@ -59,7 +78,7 @@ export default {
                                     size: stat.size,
                                 })
                             }
-                        }
+                        // }
                     }
                 } catch (e) {
                     console.warn(e)
