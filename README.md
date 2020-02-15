@@ -1,6 +1,4 @@
-# music player [![Build Status](https://travis-ci.org/sunzongzheng/music.svg?branch=master)](https://travis-ci.org/sunzongzheng/music)
-
-# 由于收到网易云音乐和 QQ 音乐的警告函，在线服务已关闭，可继续使用离线歌单，有服务器资源可自行搭建云歌单，所有代码均已开源。打包介绍见[build.md](build.md)
+# music player 支持本地,网易,qq等
 
 ## 简介
 
@@ -67,16 +65,3 @@
 -   社交分享
     ![](screenshot/7.png)
 
-## :moneybag: 捐赠
-
-捐赠会有两个用途
-
--   请允许我买杯咖啡 :coffee:
--   服务器升级与开多台负载均衡
--   微信:
-
-![微信](screenshot/donate-wechat.jpg)
-
--   支付宝:
-
-![支付宝](screenshot/donate-alipay.jpg)
