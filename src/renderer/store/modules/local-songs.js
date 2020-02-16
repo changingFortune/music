@@ -27,7 +27,7 @@ export default {
                     const stat = fs.statSync(pathname)
                     if (stat.isFile()) {
                         allMusicArr.push({pathname,folder:folderPath,item,stat});
-                    }else{
+                    }else if (stat.isDirectory()){
                         getAllMusicFile(pathname,allMusicArr);
                     }
                 }
